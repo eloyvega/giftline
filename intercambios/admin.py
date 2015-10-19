@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Intercambio, Miembros
+from .models import Intercambio, Lista
 
 admin.site.register(Intercambio)
-admin.site.register(Miembros)
+admin.site.register(Lista)
