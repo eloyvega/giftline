@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import Intercambio, Miembros
 
-# Register your models here.
+admin.site.register(Intercambio)
+admin.site.register(Miembros)

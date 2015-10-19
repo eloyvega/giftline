@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'intercambios',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -80,8 +81,8 @@ DATABASES = {
         'NAME': 'giftline_db',
         'USER': 'postgres',
         'PASSWORD': 'password',
-        'HOST': '127.0.0.1',
-        # 'HOST': '192.168.59.103',
+        # 'HOST': '127.0.0.1',
+        'HOST': '192.168.59.103',
         'PORT': '5432',
     }
 }
