@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-    Crea un nuevo intercambio
-</body>
-</html>
+{% extends "layouts/base.html" %}
+
+{% block content %}
+    <form method="post" action="/">
+        <p>Crea un nuevo intercambio</p>
+        <input type="text" placeholder="Nombre del intercambio" name="nombre"/>
+        <input type="button" value="Enviar">
+    </form>
+    <p>
+        <a href="#">Iniciar sesión</a>
+    </p>
+{% endblock %}
