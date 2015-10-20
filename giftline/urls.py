@@ -16,8 +16,10 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from intercambios import views as intercambios_views
+from userprofiles import views as user_views
 
 urlpatterns = [
     url(r'^$', intercambios_views.home, name='home'),
+    url(r'^signup/$', user_views.create_account, name='signup'),
     url(r'^admin/', include(admin.site.urls)),
 ]
