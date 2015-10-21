@@ -6,11 +6,11 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import user_passes_test
 
 
-def create_account(request):
+def signup(request):
     if request.method == 'POST':
         pass
     form = UserCreationForm()
-    return render(request, 'userprofiles/create_account.html', {'form': form})
+    return render(request, 'userprofiles/signup.html', {'form': form})
 
 
 @user_passes_test(lambda user: not user.username, login_url='/home', redirect_field_name=None)
