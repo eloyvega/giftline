@@ -3,6 +3,7 @@ from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.decorators import user_passes_test
 
 
 def create_account(request):
@@ -12,6 +13,7 @@ def create_account(request):
     return render(request, 'userprofiles/create_account.html', {'form': form})
 
 
+@user_passes_test(lambda user: not user.username, login_url='/home', redirect_field_name=None)
 def signin(request):
     follow = request.GET.get('next', '/')
     if request.method == "POST":
@@ -32,4 +34,4 @@ def signin(request):
 
 def signout(request):
     logout(request)
-    return HttpResponseRedirect(settings.LOGIN_URL)
+    return HttpResponseRedirect('/')
