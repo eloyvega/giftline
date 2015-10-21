@@ -41,6 +41,8 @@ INSTALLED_APPS = (
     'userprofiles',
 )
 
+LOGIN_URL = '/signin/'
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -82,8 +84,8 @@ DATABASES = {
         'NAME': 'giftline_db',
         'USER': 'postgres',
         'PASSWORD': 'password',
-        'HOST': '127.0.0.1',
-        # 'HOST': '192.168.59.103',
+        # 'HOST': '127.0.0.1',
+        'HOST': '192.168.59.103',
         'PORT': '5432',
     }
 }
