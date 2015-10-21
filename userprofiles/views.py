@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import user_passes_test
 
-
+@user_passes_test(lambda user: not user.username, login_url=settings.HOME_URL, redirect_field_name=None)
 def signup(request):
     if request.method == 'POST':
         pass
@@ -13,7 +13,7 @@ def signup(request):
     return render(request, 'userprofiles/signup.html', {'form': form})
 
 
-@user_passes_test(lambda user: not user.username, login_url='/home', redirect_field_name=None)
+@user_passes_test(lambda user: not user.username, login_url=settings.HOME_URL, redirect_field_name=None)
 def signin(request):
     follow = request.GET.get('next', '/')
     if request.method == "POST":

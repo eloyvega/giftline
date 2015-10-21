@@ -42,6 +42,7 @@ INSTALLED_APPS = (
 )
 
 LOGIN_URL = '/signin/'
+HOME_URL = '/home/'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
