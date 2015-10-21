@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'^$', intercambios_views.home, name='home'),
     url(r'^signup/$', user_views.create_account, name='signup'),
     url(r'^signin/$', user_views.signin, name='signin'),
+    url(r'^signout/$', user_views.signout, name='signout'),
     url(r'^admin/', include(admin.site.urls)),
 ]
