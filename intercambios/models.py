@@ -6,7 +6,12 @@ class Intercambio(models.Model):
     nombre = models.CharField(max_length=255)
     descripcion = models.TextField(blank=True)
     status = models.BooleanField(default=True)
+    creacion = models.DateTimeField(auto_now_add=True)
+    fecha = models.DateTimeField(blank=True, null=True)
+    publico = models.BooleanField(default=False)
+    eliminado = models.BooleanField(default=False)
     participantes = models.ManyToManyField(User, through='Lista')
+
 
     def __str__(self):
         return self.nombre

@@ -1,8 +1,9 @@
 {% extends "layouts/base.html" %}
 
 {% block content %}
-    <h1>Bienvenido</h1>
+    <h2>Intercambios de {{ request.user.first_name | capfirst }}</h2>
     <p>
         <a href="{% url 'signout' %}">Cerrar sesión</a>
     </p>
+
 {% endblock %}
