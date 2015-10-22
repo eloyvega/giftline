@@ -12,7 +12,6 @@ class Intercambio(models.Model):
     eliminado = models.BooleanField(default=False)
     participantes = models.ManyToManyField(User, through='Lista')
 
-
     def __str__(self):
         return self.nombre
 
@@ -21,7 +20,4 @@ class Lista(models.Model):
     user = models.ForeignKey(User)
     intercambio = models.ForeignKey(Intercambio)
     is_admin = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.user
 
