@@ -1,27 +1,28 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.decorators import user_passes_test
-from django.conf import settings
+from django.views.generic.edit import FormView
+from django.views.generic.base import RedirectView
 
-from .forms import HomeForm
+from .forms import IndexForm
 from .models import Intercambio
+from giftline.mixins import AnonymousRequiredMixin, LoginRequiredMixin
 
 
-@user_passes_test(lambda user: not user.username, login_url=settings.HOME_URL, redirect_field_name=None)
-def index(request):
-    form = HomeForm()
-    return render(request, 'intercambios/index.html', {'form': form})
+class IndexView(AnonymousRequiredMixin, FormView):
+    template_name = 'intercambios/index.html'
+    form_class = IndexForm
 
 
-@login_required
-def home(request):
-    lista_intercambios = Intercambio.objects.filter(participantes__id=request.user.id)
-    if len(lista_intercambios) == 1:
-        return HttpResponseRedirect(reverse('app:intercambio', args=(intercambio[0].id,)))
-    else:
-        return HttpResponseRedirect(reverse('app:intercambios'))
+class HomeView(LoginRequiredMixin, RedirectView):
+    permanent = False
+
+    def get_redirect_url(self):
+        lista_intercambios = Intercambio.objects.filter(participantes__id=self.request.user.id)
+        if len(lista_intercambios) == 1:
+            return reverse('app:intercambio', args=(lista_intercambios[0].id,))
+        else:
+            return reverse('app:intercambios')
 
 
 @login_required
