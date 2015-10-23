@@ -21,9 +21,9 @@ from userprofiles import views as user_views
 
 urlpatterns = [
     url(r'^$', intercambios_views.index, name='index'),
-    url(r'^signup/$', user_views.signup, name='signup'),
-    url(r'^signin/$', user_views.signin, name='signin'),
-    url(r'^signout/$', user_views.signout, name='signout'),
+    url(r'^signup/$', user_views.SignupView.as_view(), name='signup'),
+    url(r'^signin/$', user_views.SigninView.as_view(), name='signin'),
+    url(r'^signout/$', user_views.SignoutView.as_view(), name='signout'),
     url(r'app/', include(intercambios_urls, namespace='app')),
     url(r'^admin/', include(admin.site.urls)),
 ]
