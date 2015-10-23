@@ -14,17 +14,20 @@ def index(request):
     form = HomeForm()
     return render(request, 'intercambios/index.html', {'form': form})
 
+
 @login_required
 def home(request):
-    intercambio = Intercambio.objects.filter(participantes__id=request.user.id)
-    if len(intercambio) == 1:
+    lista_intercambios = Intercambio.objects.filter(participantes__id=request.user.id)
+    if len(lista_intercambios) == 1:
         return HttpResponseRedirect(reverse('app:intercambio', args=(intercambio[0].id,)))
     else:
         return HttpResponseRedirect(reverse('app:intercambios'))
 
+
 @login_required
 def intercambios(request):
     return render(request, 'intercambios/intercambios.html')
+
 
 @login_required
 def intercambio(request, id):
