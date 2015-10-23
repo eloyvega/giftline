@@ -11,11 +11,15 @@ from giftline.mixins import AnonymousRequiredMixin
 
 class SignupView(AnonymousRequiredMixin, View):
     def get(self, request):
+        return self.signup(request)
+
+    def post(self, request):
+        return self.signup(request)
+
+    def signup(self, request):
         form = UserCreationForm()
         return render(request, 'userprofiles/signup.html', {'form': form})
 
-    def post(self, request):
-        pass
 
 
 class SigninView(AnonymousRequiredMixin, View):
