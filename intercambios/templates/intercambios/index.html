@@ -2,12 +2,12 @@
 
 {% block content %}
     <p>Crea un nuevo intercambio</p>
-    <form action="{% url 'signup' %}" method="post">
+    <form action="{% url 'account:signup' %}" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Crear">
     </form>
     <p>
-        <a href="{% url 'signin' %}">Iniciar sesión</a>
+        <a href="{% url 'account:signin' %}">Iniciar sesión</a>
     </p>
 {% endblock %}

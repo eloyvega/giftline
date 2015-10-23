@@ -17,13 +17,11 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from intercambios import urls as intercambios_urls
 from intercambios import views as intercambios_views
-from userprofiles import views as user_views
+from userprofiles import urls as user_urls
 
 urlpatterns = [
     url(r'^$', intercambios_views.IndexView.as_view(), name='index'),
-    url(r'^signup/$', user_views.SignupView.as_view(), name='signup'),
-    url(r'^signin/$', user_views.SigninView.as_view(), name='signin'),
-    url(r'^signout/$', user_views.SignoutView.as_view(), name='signout'),
     url(r'app/', include(intercambios_urls, namespace='app')),
+    url(r'^account/', include(user_urls, namespace='account')),
     url(r'^admin/', include(admin.site.urls)),
 ]

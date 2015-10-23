@@ -42,7 +42,7 @@ INSTALLED_APPS = (
     'userprofiles',
 )
 
-LOGIN_URL = '/signin/'
+LOGIN_URL = '/account/signin/'
 HOME_URL = '/app/'
 
 MIDDLEWARE_CLASSES = (
