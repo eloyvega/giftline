@@ -29,6 +29,7 @@ class HomeView(LoginRequiredMixin, RedirectView):
 class IntercambiosListView(LoginRequiredMixin, ListView):
     model = Intercambio
     template_name = 'intercambios/intercambios.html'
+    context_object_name = 'intercambios'
 
 @login_required
 def intercambios(request):
