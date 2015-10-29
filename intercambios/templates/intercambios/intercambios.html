@@ -1,1 +1,10 @@
-Intercambiossss
+{% extends "layouts/base.html" %}
+
+{% block content %}
+    <h2>Intercambios</h2>
+    <ul>
+        {% for intercambio in object_list %}
+            <li>{{ intercambio.nombre }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

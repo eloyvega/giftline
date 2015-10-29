@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import FormView
 from django.views.generic.base import RedirectView
+from django.views.generic import ListView
 
 from .forms import IndexForm
 from .models import Intercambio
@@ -24,6 +25,10 @@ class HomeView(LoginRequiredMixin, RedirectView):
         else:
             return reverse('app:intercambios')
 
+
+class IntercambiosListView(LoginRequiredMixin, ListView):
+    model = Intercambio
+    template_name = 'intercambios/intercambios.html'
 
 @login_required
 def intercambios(request):
