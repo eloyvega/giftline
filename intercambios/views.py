@@ -1,6 +1,4 @@
-from django.shortcuts import render
 from django.core.urlresolvers import reverse
-from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import FormView
 from django.views.generic.base import RedirectView
 from django.views.generic import ListView, DetailView
@@ -27,14 +25,14 @@ class HomeView(LoginRequiredMixin, RedirectView):
 
 
 class IntercambiosListView(LoginRequiredMixin, ListView):
-    model = Intercambio
     template_name = 'intercambios/intercambios.html'
     context_object_name = 'intercambios'
 
+    def get_queryset(self):
+        return Intercambio.objects.filter(participantes__id=self.request.user.id)
+
 
 class IntercambioDetailView(LoginRequiredMixin, DetailView):
+    model = Intercambio
     template_name = 'intercambios/intercambio.html'
     context_object_name = 'intercambio'
-
-    def get_object(self):
-        return Intercambio.objects.get(pk=self.kwargs['pk'])
