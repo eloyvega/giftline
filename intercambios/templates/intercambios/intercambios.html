@@ -1,7 +1,7 @@
 {% extends "layouts/base-user.html" %}
 
 {% block content %}
-    <h2>Intercambios</h2>
+    <h2>Mis Intercambios</h2>
     <ul>
         {% for intercambio in intercambios %}
             <a href="{% url 'app:intercambio' intercambio.id %}">
