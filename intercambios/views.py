@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import FormView
 from django.views.generic.base import RedirectView
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from .forms import IndexForm
 from .models import Intercambio
@@ -31,11 +31,10 @@ class IntercambiosListView(LoginRequiredMixin, ListView):
     template_name = 'intercambios/intercambios.html'
     context_object_name = 'intercambios'
 
-@login_required
-def intercambios(request):
-    return render(request, 'intercambios/intercambios.html')
 
+class IntercambioDetailView(LoginRequiredMixin, DetailView):
+    template_name = 'intercambios/intercambio.html'
+    context_object_name = 'intercambio'
 
-@login_required
-def intercambio(request, id):
-    return render(request, 'intercambios/intercambio.html')
+    def get_object(self):
+        return Intercambio.objects.get(pk=self.kwargs['pk'])
