@@ -1,0 +1,9 @@
+{% extends "layouts/base.html" %}
+
+{% block menu %}
+    <ul>
+        <li><a href="{% url 'account:signout' %}">Cerrar sesión</a></li>
+        <li><a href="{% url 'app:intercambios' %}">Mis intercambios</a></li>
+        <li><a href="{% url 'app:intercambios' %}">Mi cuenta</a></li>
+    </ul>
+{% endblock %}

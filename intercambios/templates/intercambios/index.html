@@ -1,4 +1,4 @@
-{% extends "layouts/base.html" %}
+{% extends "layouts/base-anon.html" %}
 
 {% block content %}
     <p>Crea un nuevo intercambio</p>
@@ -7,7 +7,4 @@
         {{ form.as_p }}
         <input type="submit" value="Crear">
     </form>
-    <p>
-        <a href="{% url 'account:signin' %}">Iniciar sesión</a>
-    </p>
 {% endblock %}

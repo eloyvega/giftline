@@ -7,8 +7,19 @@
 </head>
 
 <body>
-    <div id="content">
-        {% block content %}{% endblock %}
-    </div>
+
+<header>
+    <a href="{% url 'index' %}">GIFTLINE</a>
+    {% block menu %}{% endblock %}
+</header>
+
+<div id="content">
+    {% block content %}{% endblock %}
+</div>
+
+<footer>
+    {% block footer %}{% endblock %}
+</footer>
+
 </body>
 </html>

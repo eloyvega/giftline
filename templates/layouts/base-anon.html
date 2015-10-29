@@ -1,0 +1,8 @@
+{% extends "layouts/base.html" %}
+
+{% block menu %}
+    <ul>
+        <li><a href="{% url 'account:signin' %}">Iniciar sesión</a></li>
+        <li><a href="{% url 'account:signup' %}">Crear cuenta</a></li>
+    </ul>
+{% endblock %}

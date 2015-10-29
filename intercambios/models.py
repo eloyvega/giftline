@@ -21,3 +21,5 @@ class Lista(models.Model):
     intercambio = models.ForeignKey(Intercambio)
     is_admin = models.BooleanField(default=False)
 
+    def __str__(self):
+        return 'Lista de %s' % self.intercambio.nombre
