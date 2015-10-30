@@ -17,9 +17,10 @@ class HomeView(LoginRequiredMixin, RedirectView):
     permanent = False
 
     def get_redirect_url(self):
-        lista_intercambios = Intercambio.objects.filter(participantes__id=self.request.user.id)
-        if len(lista_intercambios) == 1:
-            return reverse('app:intercambio', args=(lista_intercambios[0].id,))
+        num_intercambios = Intercambio.objects.filter(participantes__id=self.request.user.id).count()
+        if num_intercambios == 1:
+            return reverse('app:intercambio',
+                           args=(Intercambio.objects.get(participantes__id=self.request.user.id).id,))
         else:
             return reverse('app:intercambios')
 
