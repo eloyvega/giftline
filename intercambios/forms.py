@@ -11,4 +11,4 @@ class IndexForm(forms.Form):
 class CrearIntercambioForm(forms.ModelForm):
     class Meta:
         model = Intercambio
-        fields = ['nombre', 'descripcion', 'fecha']
+        fields = ['nombre', 'descripcion', ]
