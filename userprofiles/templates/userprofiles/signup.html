@@ -1,7 +1,7 @@
 {% extends "layouts/base-anon.html" %}
 
 {% block content %}
-<p>Crea una cuenta primero morsa foca!</p>
+    <p>Crea una cuenta primero morsa foca!</p>
     <form action="{% url 'account:signup' %}" method="post">
         {% csrf_token %}
         {{ form.as_p }}

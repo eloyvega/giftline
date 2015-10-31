@@ -1,7 +1,9 @@
 {% extends "layouts/base-user.html" %}
 
 {% block content %}
-    <h2>Mis Intercambios</h2>
+    <h1>Intercambios</h1>
+    <a href="{% url 'app:crear' %}">Crear nuevo intercambio</a>
+    <h2>Tus intercambios:</h2>
     <ul>
         {% for intercambio in intercambios %}
             <a href="{% url 'app:intercambio' intercambio.id %}">

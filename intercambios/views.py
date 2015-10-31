@@ -3,7 +3,7 @@ from django.views.generic.edit import FormView
 from django.views.generic.base import RedirectView
 from django.views.generic import ListView, DetailView
 
-from .forms import IndexForm
+from .forms import IndexForm, CrearIntercambioForm
 from .models import Intercambio
 from giftline.mixins import AnonymousRequiredMixin, LoginRequiredMixin
 
@@ -37,3 +37,8 @@ class IntercambioDetailView(LoginRequiredMixin, DetailView):
     model = Intercambio
     template_name = 'intercambios/intercambio.html'
     context_object_name = 'intercambio'
+
+
+class CrearIntercambioView(LoginRequiredMixin, FormView):
+    template_name = 'intercambios/crear.html'
+    form_class = CrearIntercambioForm
