@@ -21,7 +21,6 @@ class SignupView(AnonymousRequiredMixin, View):
         return render(request, 'userprofiles/signup.html', {'form': form})
 
 
-
 class SigninView(AnonymousRequiredMixin, View):
     def get(self, request):
         follow = self.get_next(request)
@@ -38,11 +37,17 @@ class SigninView(AnonymousRequiredMixin, View):
                 login(request, user)
                 return HttpResponseRedirect(follow)
             else:
-                return HttpResponse("Inactive user.")
+                return HttpResponse('Inactive user.')
         else:
-            return HttpResponseRedirect(settings.LOGIN_URL)
+            form = AuthenticationForm()
+            return render(request, 'userprofiles/signin.html', {
+                'form': form,
+                'redirect_to': follow,
+                'error_message': 'Usuario o contraseña incorrecto',
+            })
 
-    def get_next(self, request):
+    @staticmethod
+    def get_next(request):
         return request.GET.get('next', '/')
 
 

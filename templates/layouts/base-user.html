@@ -1,10 +1,9 @@
 {% extends "layouts/base.html" %}
 
 {% block menu %}
-    <p>Usuario: {% block user %}{{ request.user.get_full_name }}{% endblock %}</p>
+    <p>Usuario: <a href="{% url 'app:intercambios' %}">{{ request.user.get_full_name }}</a></p>
     <ul>
         <li><a href="{% url 'account:signout' %}">Cerrar sesión</a></li>
         <li><a href="{% url 'app:intercambios' %}">Mis intercambios</a></li>
-        <li><a href="{% url 'app:intercambios' %}">Mi cuenta</a></li>
     </ul>
 {% endblock %}

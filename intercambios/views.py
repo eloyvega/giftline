@@ -1,7 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.shortcuts import render
 from django.views.generic.edit import FormView
-from django.views.generic.base import RedirectView
+from django.views.generic.base import RedirectView, View
 from django.views.generic import ListView, DetailView
+from django.http import HttpResponseRedirect
 
 from .forms import IndexForm, CrearIntercambioForm
 from .models import Intercambio
@@ -39,6 +42,38 @@ class IntercambioDetailView(LoginRequiredMixin, DetailView):
     context_object_name = 'intercambio'
 
 
-class CrearIntercambioView(LoginRequiredMixin, FormView):
+# fixme Fuera de servicio hasta encontrar la implementacion correcta
+class CrearIntercambioViewTODO(LoginRequiredMixin, FormView):
     template_name = 'intercambios/crear.html'
     form_class = CrearIntercambioForm
+
+    def form_valid(self, form):
+        form.crear_lista()
+        return super(CrearIntercambioView, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('app:invitar', args=(1,))
+
+
+class CrearIntercambioView(LoginRequiredMixin, View):
+    def get(self, request):
+        form = CrearIntercambioForm()
+        return render(request, 'intercambios/crear.html', {'form': form})
+
+    def post(self, request):
+        nombre = request.POST['nombre']
+        descripcion = request.POST['descripcion']
+        i = Intercambio()
+        i.nombre = nombre
+        i.descripcion = descripcion
+        i.save()
+        return HttpResponseRedirect(reverse('app:invitar', args=(i.id,)))
+
+
+@login_required
+def invitar(request, pk):
+    return render(request, 'intercambios/invitar.html')
+
+
+class InvitarIntercambioView(LoginRequiredMixin, FormView):
+    template_name = 'intercambios/invitar.html'
