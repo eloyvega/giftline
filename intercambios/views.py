@@ -5,9 +5,8 @@ from django.views.generic.edit import FormView
 from django.views.generic.base import RedirectView, View
 from django.views.generic import ListView, DetailView
 from django.http import HttpResponseRedirect
-
 from .forms import IndexForm, CrearIntercambioForm
-from .models import Intercambio
+from .models import Intercambio, Lista
 from giftline.mixins import AnonymousRequiredMixin, LoginRequiredMixin
 
 
@@ -61,13 +60,18 @@ class CrearIntercambioView(LoginRequiredMixin, View):
         return render(request, 'intercambios/crear.html', {'form': form})
 
     def post(self, request):
+        id = self.iniciar_intercambio(request)
+        return HttpResponseRedirect(reverse('app:invitar', args=(id,)))
+
+    def iniciar_intercambio(self, request):
         nombre = request.POST['nombre']
         descripcion = request.POST['descripcion']
-        i = Intercambio()
-        i.nombre = nombre
-        i.descripcion = descripcion
-        i.save()
-        return HttpResponseRedirect(reverse('app:invitar', args=(i.id,)))
+        intercambio = Intercambio(nombre=nombre, descripcion=descripcion)
+        intercambio.save()
+        # El creador del intercambio debe ser miembro y administrador:
+        lista = Lista(user=request.user, intercambio=intercambio, is_admin=True)
+        lista.save()
+        return intercambio.id
 
 
 @login_required
