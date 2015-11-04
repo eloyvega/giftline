@@ -1,13 +1,15 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.shortcuts import render
-from django.views.generic.edit import FormView
-from django.views.generic.base import RedirectView, View
-from django.views.generic import ListView, DetailView
 from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from django.views.generic import ListView, DetailView
+from django.views.generic.base import RedirectView, View
+from django.views.generic.edit import FormView
+
+from giftline.mixins import AnonymousRequiredMixin, LoginRequiredMixin
 from .forms import IndexForm, CrearIntercambioForm
 from .models import Intercambio, Lista
-from giftline.mixins import AnonymousRequiredMixin, LoginRequiredMixin
 
 
 class IndexView(AnonymousRequiredMixin, FormView):
@@ -40,6 +42,11 @@ class IntercambioDetailView(LoginRequiredMixin, DetailView):
     template_name = 'intercambios/intercambio.html'
     context_object_name = 'intercambio'
 
+    def get_context_data(self, **kwargs):
+        context = super(IntercambioDetailView, self).get_context_data(**kwargs)
+        context['admins'] = User.objects.filter(lista__intercambio=self.object, lista__is_admin=True)
+        return context
+
 
 # fixme Fuera de servicio hasta encontrar la implementacion correcta
 class CrearIntercambioViewTODO(LoginRequiredMixin, FormView):
@@ -48,7 +55,7 @@ class CrearIntercambioViewTODO(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         form.crear_lista()
-        return super(CrearIntercambioView, self).form_valid(form)
+        return super(CrearIntercambioViewTODO, self).form_valid(form)
 
     def get_success_url(self):
         return reverse('app:invitar', args=(1,))
