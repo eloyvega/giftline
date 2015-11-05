@@ -67,10 +67,11 @@ class CrearIntercambioView(LoginRequiredMixin, View):
         return render(request, 'intercambios/crear.html', {'form': form})
 
     def post(self, request):
-        id = self.iniciar_intercambio(request)
-        return HttpResponseRedirect(reverse('app:invitar', args=(id,)))
+        intercambio_id = self.iniciar_intercambio(request)
+        return HttpResponseRedirect(reverse('app:invitar', args=(intercambio_id,)))
 
-    def iniciar_intercambio(self, request):
+    @staticmethod
+    def iniciar_intercambio(request):
         nombre = request.POST['nombre']
         descripcion = request.POST['descripcion']
         intercambio = Intercambio(nombre=nombre, descripcion=descripcion)
