@@ -2,6 +2,7 @@
 
 {% block content %}
     <h1>Crea un nuevo intercambio</h1>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
     <form action="{% url 'app:crear' %}" method="post">
         {% csrf_token %}
         {{ form.as_p }}
