@@ -67,17 +67,20 @@ class CrearIntercambioView(LoginRequiredMixin, View):
         return render(request, 'intercambios/crear.html', {'form': form})
 
     def post(self, request):
-        intercambio_id = self.iniciar_intercambio(request)
-        return HttpResponseRedirect(reverse('app:invitar', args=(intercambio_id,)))
+        form = CrearIntercambioForm(request.POST)
+        if form.is_valid():
+            intercambio_id = self.iniciar_intercambio(request.user, form)
+            return HttpResponseRedirect(reverse('app:invitar', args=(intercambio_id,)))
+        return render(request, 'intercambios/crear.html', {'form': form})
 
     @staticmethod
-    def iniciar_intercambio(request):
-        nombre = request.POST['nombre']
-        descripcion = request.POST['descripcion']
+    def iniciar_intercambio(user, form):
+        nombre = form.cleaned_data['nombre']
+        descripcion = form.cleaned_data['descripcion']
         intercambio = Intercambio(nombre=nombre, descripcion=descripcion)
         intercambio.save()
         # El creador del intercambio debe ser miembro y administrador:
-        lista = Lista(user=request.user, intercambio=intercambio, is_admin=True)
+        lista = Lista(user=user, intercambio=intercambio, is_admin=True)
         lista.save()
         return intercambio.id
 
