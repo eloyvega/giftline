@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from intercambios import urls as intercambios_urls
 from intercambios import views as intercambios_views
 from userprofiles import urls as user_urls
@@ -25,3 +26,5 @@ urlpatterns = [
     url(r'^account/', include(user_urls, namespace='account')),
     url(r'^admin/', include(admin.site.urls)),
 ]
+
+urlpatterns += staticfiles_urlpatterns()
