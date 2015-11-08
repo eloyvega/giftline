@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'rest_framework',
     'intercambios',
     'userprofiles',
 )
@@ -86,8 +87,8 @@ DATABASES = {
         'NAME': 'giftline_db',
         'USER': 'postgres',
         'PASSWORD': 'password',
-        'HOST': '127.0.0.1',
-        # 'HOST': '192.168.59.103',
+        # 'HOST': '127.0.0.1',
+        'HOST': '192.168.59.103',
         'PORT': '5432',
     }
 }
