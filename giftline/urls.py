@@ -16,16 +16,10 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from rest_framework import routers
+
 from intercambios import urls as intercambios_urls
 from intercambios import views as intercambios_views
 from userprofiles import urls as user_urls
-from userprofiles import views as user_views
-
-router = routers.DefaultRouter()
-router.register(r'intercambios', intercambios_views.IntercambioViewSet)
-router.register(r'usuarios', user_views.UserViewSet)
-
 
 urlpatterns = [
     url(r'^$', intercambios_views.IndexView.as_view(), name='index'),
