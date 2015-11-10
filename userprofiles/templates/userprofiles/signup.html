@@ -2,6 +2,7 @@
 
 {% block content %}
     <p>Crea una cuenta primero morsa foca!</p>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
     <form action="{% url 'account:signup' %}" method="post">
         {% csrf_token %}
         {{ form.as_p }}

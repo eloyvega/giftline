@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.urlresolvers import reverse
@@ -10,12 +11,21 @@ from giftline.mixins import AnonymousRequiredMixin
 
 class SignupView(AnonymousRequiredMixin, View):
     def get(self, request):
-        return self.signup(request)
+        return self.render_form(request)
 
     def post(self, request):
-        return self.signup(request)
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            messages.info(request, "Thanks for registering. You are now logged in.")
+            user = authenticate(username=request.POST['username'], password=request.POST['password1'])
+            login(request, user)
+            return HttpResponseRedirect(reverse('index'))
+        else:
+            return self.render_form(request)
 
-    def signup(self, request):
+    @staticmethod
+    def render_form(request):
         form = UserCreationForm()
         return render(request, 'userprofiles/signup.html', {'form': form})
 
