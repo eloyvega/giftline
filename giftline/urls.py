@@ -32,8 +32,6 @@ urlpatterns = [
     url(r'app/', include(intercambios_urls, namespace='app')),
     url(r'^account/', include(user_urls, namespace='account')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^api/', include(router.urls)),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

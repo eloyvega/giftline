@@ -6,12 +6,10 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import RedirectView, View
 from django.views.generic.edit import FormView
-from rest_framework import viewsets
 
 from giftline.mixins import AnonymousRequiredMixin, LoginRequiredMixin
 from .forms import IndexForm, CrearIntercambioForm
 from .models import Intercambio, Lista
-from .serializers import IntercambioSerializer
 
 
 class IndexView(AnonymousRequiredMixin, FormView):
@@ -94,12 +92,3 @@ def invitar(request, pk):
 
 class InvitarIntercambioView(LoginRequiredMixin, FormView):
     template_name = 'intercambios/invitar.html'
-
-
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# API
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-class IntercambioViewSet(viewsets.ModelViewSet):
-    serializer_class = IntercambioSerializer
-    queryset = Intercambio.objects.all()
