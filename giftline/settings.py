@@ -27,7 +27,7 @@ SECRET_KEY = 'f=&!#du_*2r7%uqm8k*j%la%_)d!5-ujdgy)4^gxqmwzuf!_uc'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['giftline.org']
 
 
 # Application definition
@@ -106,6 +106,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
