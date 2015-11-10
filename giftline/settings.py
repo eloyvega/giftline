@@ -25,9 +25,9 @@ env = environ.Env()
 SECRET_KEY = 'f=&!#du_*2r7%uqm8k*j%la%_)d!5-ujdgy)4^gxqmwzuf!_uc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DJANGO_DEBUG', False)
 
-ALLOWED_HOSTS = ['giftline.org']
+ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['.softitlan.com'])
 
 
 # Application definition
