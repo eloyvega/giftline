@@ -27,7 +27,7 @@ SECRET_KEY = 'f=&!#du_*2r7%uqm8k*j%la%_)d!5-ujdgy)4^gxqmwzuf!_uc'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DJANGO_DEBUG', False)
 
-ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['.softitlan.com'])
+ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['.giftline.org'])
 
 
 # Application definition
