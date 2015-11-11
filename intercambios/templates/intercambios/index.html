@@ -1,7 +1,10 @@
 {% extends "layouts/base-anon.html" %}
 
 {% block content %}
-    <p>Crea un nuevo intercambio</p>
+    <h1>Giftline</h1>
+    <h2>Intercambio de regalos</h2>
+    <p>Utiliza nuestra app para tus intercambios de regalos. Crea varios grupos e invita a todos tus amigos</p>
+    <p>Empieza creando un nuevo intercambio:</p>
     <form action="{% url 'account:signup' %}" method="get">
         {{ form.as_p }}
         <input type="submit" value="Crear">
