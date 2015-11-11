@@ -1,11 +1,12 @@
-{% extends "layouts/base-anon.html" %}
+{% extends "layouts/base.html" %}
 
 {% block content %}
-    <p>Crea una cuenta primero morsa foca!</p>
+    <h2>Creación de cuenta de usuario</h2>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
     <form action="{% url 'account:signup' %}" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Crear">
     </form>
+    <p>Si ya tienes cuenta, <a href="{% url 'account:signin' %}">inicia sesión</a></p>
 {% endblock %}

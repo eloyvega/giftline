@@ -1,4 +1,4 @@
-{% extends "layouts/base-anon.html" %}
+{% extends "layouts/base.html" %}
 
 {% block content %}
     <h1>Iniciar sesión</h1>
@@ -10,4 +10,5 @@
 
         <input type="submit" value="Login"/>
     </form>
+    <p>Si no tienes cuenta, <a href="{% url 'account:signup' %}">crea una</a></p>
 {% endblock %}
