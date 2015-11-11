@@ -1,14 +1,19 @@
 {% extends "layouts/base.html" %}
 
 {% block content %}
-    <h1>Iniciar sesión</h1>
+    <h2>Iniciar sesión</h2>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-    <form method="post" action=".?next={{ redirect_to }}">
+    <form action=".?next={{ redirect_to }}" method="post">
 
         {% csrf_token %}
         {{ form.as_p }}
-
+        {% if request.GET.intercambio %}
+            <input type="hidden" name="intercambio" value="{{ request.GET.intercambio }}">
+        {% endif %}
         <input type="submit" value="Login"/>
     </form>
-    <p>Si no tienes cuenta, <a href="{% url 'account:signup' %}">crea una</a></p>
+    <p>Si no tienes cuenta, <a href="
+
+            {% url 'account:signup' %}{% if request.GET.intercambio %}?intercambio={{ request.GET.intercambio }}{% endif %}">crea
+        una</a></p>
 {% endblock %}

@@ -2,8 +2,7 @@
 
 {% block content %}
     <p>Crea un nuevo intercambio</p>
-    <form action="{% url 'account:signup' %}" method="post">
-        {% csrf_token %}
+    <form action="{% url 'account:signup' %}" method="get">
         {{ form.as_p }}
         <input type="submit" value="Crear">
     </form>

@@ -63,7 +63,8 @@ class CrearIntercambioViewTODO(LoginRequiredMixin, FormView):
 
 class CrearIntercambioView(LoginRequiredMixin, View):
     def get(self, request):
-        form = CrearIntercambioForm()
+        data = {'nombre': request.GET.get('nombre', '')}
+        form = CrearIntercambioForm(initial=data)
         return render(request, 'intercambios/crear.html', {'form': form})
 
     def post(self, request):

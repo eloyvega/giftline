@@ -14,13 +14,17 @@ class SignupView(AnonymousRequiredMixin, View):
         return self.render_form(request)
 
     def post(self, request):
+        intercambio = request.POST.get('intercambio', '')
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             messages.info(request, "Thanks for registering. You are now logged in.")
             user = authenticate(username=request.POST['username'], password=request.POST['password1'])
             login(request, user)
-            return HttpResponseRedirect(reverse('index'))
+            if intercambio:
+                return HttpResponseRedirect('%s?nombre=%s' % (reverse('app:crear'), intercambio))
+            else:
+                return HttpResponseRedirect(reverse('index'))
         else:
             return self.render_form(request)
 
@@ -37,14 +41,21 @@ class SigninView(AnonymousRequiredMixin, View):
         return render(request, 'userprofiles/signin.html', {'form': form, 'redirect_to': follow})
 
     def post(self, request):
-        follow = self.get_next(request)
+        intercambio = request.POST.get('intercambio', '')
+        if intercambio:
+            follow = reverse('app:crear')
+        else:
+            follow = self.get_next(request)
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect(follow)
+                if intercambio:
+                    return HttpResponseRedirect('%s?nombre=%s' % (follow, intercambio))
+                else:
+                    return HttpResponseRedirect(follow)
             else:
                 return HttpResponse('Inactive user.')
         else:
