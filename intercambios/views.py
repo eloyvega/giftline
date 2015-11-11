@@ -43,19 +43,6 @@ class IntercambioDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-# fixme Fuera de servicio hasta encontrar la implementacion correcta
-class CrearIntercambioViewTODO(LoginRequiredMixin, FormView):
-    template_name = 'intercambios/crear.html'
-    form_class = CrearIntercambioForm
-
-    def form_valid(self, form):
-        form.crear_lista()
-        return super(CrearIntercambioViewTODO, self).form_valid(form)
-
-    def get_success_url(self):
-        return reverse('app:invitar', args=(1,))
-
-
 class CrearIntercambioView(LoginRequiredMixin, View):
     def get(self, request):
         data = {'nombre': request.GET.get('nombre', '')}

@@ -9,8 +9,6 @@ class IndexForm(forms.Form):
 
 
 class CrearIntercambioForm(forms.ModelForm):
-    def crear_lista(self):
-        pass
 
     class Meta:
         model = Intercambio
