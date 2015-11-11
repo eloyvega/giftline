@@ -18,15 +18,10 @@ class IndexView(AnonymousRequiredMixin, FormView):
 
 
 class HomeView(LoginRequiredMixin, RedirectView):
-    permanent = False
+    permanent = True
 
     def get_redirect_url(self):
-        num_intercambios = Intercambio.objects.filter(participantes__id=self.request.user.id).count()
-        if num_intercambios == 1:
-            return reverse('app:intercambio',
-                           args=(Intercambio.objects.get(participantes__id=self.request.user.id).id,))
-        else:
-            return reverse('app:intercambios')
+        return reverse('app:intercambios')
 
 
 class IntercambiosListView(LoginRequiredMixin, ListView):

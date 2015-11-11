@@ -24,7 +24,7 @@ class SignupView(AnonymousRequiredMixin, View):
             if intercambio:
                 return HttpResponseRedirect('%s?nombre=%s' % (reverse('app:crear'), intercambio))
             else:
-                return HttpResponseRedirect(reverse('index'))
+                return HttpResponseRedirect(reverse('app:home'))
         else:
             return self.render_form(request)
 
