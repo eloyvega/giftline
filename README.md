@@ -4,7 +4,7 @@
 
 Aplicación en Django para administrar intercambios de regalos (amigo secreto, secret santa...)
 
-Ayuda comunidad Platzi!
+**Ayuda comunidad Platzi!**
 
 Usa el sistema de issues para peticiones y comentarios. Utiliza tus super conocimientos para contribuir
 con líneas de código para completar las funcionalidades que quieres que tenga.
