@@ -3,9 +3,9 @@ from django.contrib import admin
 from .models import Intercambio, Participante
 
 
-class ParticipanteInline(admin.StackedInline):
+class ParticipanteInline(admin.TabularInline):
     model = Participante
-    extra = 3
+    extra = 1
 
 
 class IntercambioAdmin(admin.ModelAdmin):

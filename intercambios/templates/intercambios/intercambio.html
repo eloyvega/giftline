@@ -5,7 +5,7 @@
     <p>Participantes:</p>
     <ul>
         {% for user in intercambio.miembros.all %}
-            <li>{{ user.first_name }} {% if user in admins %}[admin]{% endif %}</li>
+            <li>{{ user.get_full_name }} {% if user in admins %}[admin]{% endif %}</li>
         {% endfor %}
     </ul>
 {% endblock %}
