@@ -10,16 +10,16 @@ class Intercambio(models.Model):
     fecha = models.DateTimeField(blank=True, null=True)
     publico = models.BooleanField(default=False)
     eliminado = models.BooleanField(default=False)
-    participantes = models.ManyToManyField(User, through='Lista')
+    miembros = models.ManyToManyField(User, through='Participante')
 
     def __str__(self):
         return self.nombre
 
 
-class Lista(models.Model):
+class Participante(models.Model):
     user = models.ForeignKey(User)
     intercambio = models.ForeignKey(Intercambio)
     is_admin = models.BooleanField(default=False)
 
     def __str__(self):
-        return 'Lista de %s' % self.intercambio.nombre
+        return 'Participante de %s' % self.intercambio.nombre

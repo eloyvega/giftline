@@ -9,7 +9,7 @@ from django.views.generic.edit import FormView
 
 from giftline.mixins import AnonymousRequiredMixin, LoginRequiredMixin
 from .forms import IndexForm, CrearIntercambioForm
-from .models import Intercambio, Lista
+from .models import Intercambio, Participante
 
 
 class IndexView(AnonymousRequiredMixin, FormView):
@@ -29,7 +29,7 @@ class IntercambiosListView(LoginRequiredMixin, ListView):
     context_object_name = 'intercambios'
 
     def get_queryset(self):
-        return Intercambio.objects.filter(participantes__id=self.request.user.id)
+        return Intercambio.objects.filter(miembros__id=self.request.user.id)
 
 
 class IntercambioDetailView(LoginRequiredMixin, DetailView):
@@ -39,7 +39,7 @@ class IntercambioDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(IntercambioDetailView, self).get_context_data(**kwargs)
-        context['admins'] = User.objects.filter(lista__intercambio=self.object, lista__is_admin=True)
+        context['admins'] = User.objects.filter(participante__intercambio=self.object, participante__is_admin=True)
         return context
 
 
@@ -63,7 +63,7 @@ class CrearIntercambioView(LoginRequiredMixin, View):
         intercambio = Intercambio(nombre=nombre, descripcion=descripcion)
         intercambio.save()
         # El creador del intercambio debe ser miembro y administrador:
-        lista = Lista(user=user, intercambio=intercambio, is_admin=True)
+        lista = Participante(user=user, intercambio=intercambio, is_admin=True)
         lista.save()
         return intercambio.id
 

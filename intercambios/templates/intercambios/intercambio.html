@@ -4,7 +4,7 @@
     <h1>{{ intercambio.nombre }}</h1>
     <p>Participantes:</p>
     <ul>
-        {% for user in intercambio.participantes.all %}
+        {% for user in intercambio.miembros.all %}
             <li>{{ user.first_name }} {% if user in admins %}[admin]{% endif %}</li>
         {% endfor %}
     </ul>
